@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: starwallet
+spec:
+  selector:
+    matchLabels:
+      app: starwallet
+  replicas: 1
+  revisionHistoryLimit: 0
+  template:
+    metadata:
+      labels:
+        app: starwallet
+    spec:
+      containers:
+      - name: starwallet
+        image: __AWS_ECR_REGISTRY__/coinsummer/starwallet:__TAG__
+        ports:
+        - containerPort: 3000
+      imagePullSecrets:
+      - name: regcred
