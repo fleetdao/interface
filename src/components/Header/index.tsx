@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect, useRef, useState } from 'react'
+import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -31,7 +32,6 @@ const HeaderContainer = styled.header`
   z-index: 2;
   background-color: ${({ theme }) => theme.bg2};
   box-shadow: rgb(0 0 0 / 5%) 0px 2px 3px;
-  transition: .2s all ease-in;
 
   > a {
     display: flex;
@@ -39,7 +39,7 @@ const HeaderContainer = styled.header`
     height: 100%;
   }
 `
-const LogoWrapper = styled.span`
+const LogoWrapper = styled.a`
   display: flex;
   margin-left: 1rem;
   font-size: 22px;
@@ -165,8 +165,7 @@ const ThemeToggle = styled.a`
   `};
 `
 
-const HeaderPage = () => {
-  const node = useRef<HTMLDivElement>()
+const Header = () => {
   const dispatch = useDispatch()
   const router = useRouter()
   const { t } = useTranslation('common')
@@ -208,18 +207,18 @@ const HeaderPage = () => {
       </Link>
 
       <Navbar>
-        <NavLink href="/">{t('navbar.home')}</NavLink>
-        <NavLink href="/project">{t('navbar.project')}</NavLink>
-        <NavLink href="/proposal">{t('navbar.proposal')}</NavLink>
+        <NavLink href="">{t('navbar.home')}</NavLink>
+        <NavLink href="project">{t('navbar.project')}</NavLink>
+        <NavLink href="proposal">{t('navbar.proposal')}</NavLink>
       </Navbar>
 
       <MenuContainer>
-        <LanguageToggle onClick={changeLanguage(currentLanguage)} inHomePage={inHomePage}>
+        <LanguageToggle onClick={changeLanguage(currentLanguage)}>
           <Globe size={18} />
           <LanguageText>{currentLanguage === 'zh' ? 'English' : '简体中文'}</LanguageText>
         </LanguageToggle>
 
-        <ThemeToggle onClick={() => toggleDarkMode()} inHomePage={inHomePage}>
+        <ThemeToggle onClick={() => toggleDarkMode()}>
           {darkMode ? <Sun size={16} /> : <Moon size={16} />}
         </ThemeToggle>
       </MenuContainer>
@@ -227,4 +226,4 @@ const HeaderPage = () => {
   )
 }
 
-export default HeaderPage
+export default Header

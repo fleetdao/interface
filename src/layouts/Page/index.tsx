@@ -1,56 +1,56 @@
 import React from 'react'
-import { ArrowLeft } from 'react-feather'
-import BaseLayout from '../Base'
 import styled from 'styled-components'
+import Loader from '../../components/Loader'
+import Header from '../../components/Header'
+import Footer from '../../components/Footer'
+import Column from '../../components/Column'
 
-const NavContainer = styled.div`
-`
-
-const NavBackButton = styled.a`
-  display: inline-flex;
-  width: 3rem;
-  height: 3rem;
-  transition: all .2s ease-in-out;
-
-  &:hover {
-    transform: translateX(-4px);
-  }
-`
-
-const TitleContainer = styled.div`
+const BaseContainer = styled.div`
+  position: relative;
   display: flex;
-  justify-content: center;
-  font-size: 1.5rem;
-  font-weight: 700;
+  flex: auto;
+  flex-direction: column;
+  padding: 3.75rem 0 2rem;
+  min-height: calc(100vh - 3.75rem - 2rem);
 `
 
-interface PageProps {
-  title?: React.ReactNode | string
+const MainContainer = styled.main`
+  display: flex;
+  flex: auto;
+  min-width: 0%;
+`
+
+const ContentContainer = styled(Column)`
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  margin: 1.25rem auto;
+  padding: 1.25rem;
+  width: 100%;
+  max-width: 1240px;
+  background-color: ${({ theme }) => theme.bg2};
+  border-radius: .75rem;
+  overflow: hidden;
+`
+
+
+interface BaseLayoutProps {
   children: React.ReactChild
-  home?: boolean
-  onBack?: () => void
 }
 
-const PageLayout = ({ title, children, home, onBack }: PageProps) => {
+const BaseLayout = ({ children }: BaseLayoutProps) => {
+
   return (
-    <BaseLayout>
-      <>
-        <NavContainer>
-          {!home && (
-            <NavBackButton onClick={onBack}>
-              <ArrowLeft size={40} />
-            </NavBackButton>
-          )}
-        </NavContainer>
-        {title && (
-          <TitleContainer>
-            {title}
-          </TitleContainer>
-        )}
-        {children}
-      </>
-    </BaseLayout>
+    <BaseContainer>
+      <Header />
+      <MainContainer>
+        <ContentContainer>
+          {children}
+        </ContentContainer>
+      </MainContainer>
+      <Footer />
+    </BaseContainer>
   )
 }
 
-export default PageLayout
+export default BaseLayout

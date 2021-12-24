@@ -1,23 +1,24 @@
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Client } from '@notionhq/client'
-import BaseLayout from '../../layouts/Base'
+import PageLayout from '../../layouts/Page'
 import { DatabaseID } from '../../constants/project'
+import recordMap from '../../../mock/database.json'
 
 const notion = new Client({ auth: process.env.NOTION_AUTH_SECRET })
 
 export const getStaticProps = async ({ locale }: { locale: any }) => {
 
-  const databaseId = DatabaseID.PROJECT
-  const recordMap = await notion.databases.query({
-    database_id: databaseId,
-    sorts: [
-      {
-        property: 'Last edited at',
-        direction: 'descending',
-      }
-    ]
-  })
+  // const databaseId = DatabaseID.PROJECT
+  // const recordMap = await notion.databases.query({
+  //   database_id: databaseId,
+  //   sorts: [
+  //     {
+  //       property: 'Last edited at',
+  //       direction: 'descending',
+  //     }
+  //   ]
+  // })
 
   return {
     props: {
@@ -35,7 +36,7 @@ const ProjectPage = ({ recordMap }: any) => {
     return null
   }
   return (
-    <BaseLayout>
+    <PageLayout>
       <div>
         <h1>Projects</h1>
         <ul>
@@ -50,7 +51,7 @@ const ProjectPage = ({ recordMap }: any) => {
           })}
         </ul>
       </div>
-    </BaseLayout>
+    </PageLayout>
   )
 }
 

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import BaseLayout from '../../layouts/Base'
+import PageLayout from '../../layouts/Page'
 
 export const getStaticProps = async ({ locale }: { locale: any }) => ({
   props: {
@@ -13,9 +13,9 @@ const ProposalPage = () => {
   const { t } = useTranslation('common')
 
   return (
-    <BaseLayout>
+    <PageLayout>
       <h1>{t('navbar.proposal')}</h1>
-    </BaseLayout>
+    </PageLayout>
   )
 }
 

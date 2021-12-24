@@ -7,8 +7,8 @@ const Settings = () => {
   const handleBack = () => router.push('/home')
 
   return (
-    <PageLayout onBack={handleBack} title="设置管理">
-      <h1></h1>
+    <PageLayout>
+      <h1>Settings</h1>
     </PageLayout>
   )
 }

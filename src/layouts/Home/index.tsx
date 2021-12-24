@@ -1,6 +1,6 @@
 import React from 'react'
 import { ArrowLeft } from 'react-feather'
-import BaseLayout from '../Base'
+import BaseLayout from '../Page'
 import styled from 'styled-components'
 
 const NavContainer = styled.div`
@@ -24,14 +24,14 @@ const TitleContainer = styled.div`
   font-weight: 700;
 `
 
-interface PageProps {
+interface HomeLayoutProps {
   title?: React.ReactNode | string
   children: React.ReactChild
   home?: boolean
   onBack?: () => void
 }
 
-const HomeLayout = ({ title, children, home, onBack }: PageProps) => {
+const HomeLayout = ({ title, children, home, onBack }: HomeLayoutProps) => {
   return (
     <BaseLayout>
       <>
