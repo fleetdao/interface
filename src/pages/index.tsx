@@ -7,13 +7,13 @@ import styled, { keyframes } from 'styled-components'
 import HomeLayout from '../layouts/Home'
 import Column from '../components/Column'
 import Row from '../components/Row'
+import { useDarkModeManager } from '../state/user/hooks'
 import { useHomeDataSource } from '../state/home/datasource'
 import { AboutDatasource, RoadmapDatasource, CommunityDatasource } from '../interfaces/home'
 import { darken } from 'polished'
 import { GitHub, Twitter } from 'react-feather'
 import { Discord } from '../components/Icon'
 
-import { useDarkModeManager } from '../state/user/hooks'
 
 export const getStaticProps = async ({ locale }: { locale: string }) => ({
   props: {
