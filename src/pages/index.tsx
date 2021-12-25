@@ -1,5 +1,4 @@
-import { GetStaticProps } from 'next'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback } from 'react'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Parallax } from 'react-parallax'

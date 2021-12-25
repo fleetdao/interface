@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
 import { Globe, Moon, Sun } from 'react-feather'
-import { darken, lighten, opacify, shade, tint, transitions } from 'polished'
+import { shade, tint, transitions } from 'polished'
 import { useTranslation } from 'next-i18next'
 import { useDarkModeManager } from '../../state/user/hooks'
 import { updateToggleLanguage } from '../../state/application/actions'
@@ -28,7 +28,7 @@ const HeaderContainer = styled.header`
   height: ${({ theme }) => theme.headerHeight};
   z-index: 10;
   background-color: ${({ theme }) => theme.darkMode ? 'rgba(43, 43, 62, .1)' : 'rgba(255, 255, 255, .1)'};
-  backdrop-filter: blur(80px);
+  backdrop-filter: blur(200px);
 
   > a {
     display: flex;
