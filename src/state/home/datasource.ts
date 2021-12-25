@@ -37,6 +37,7 @@ const roadmapDataSource = (t: any): RoadmapDatasource[] => [
     month: t('roadmap.section2.month'),
     info: t('roadmap.section2.info'),
     top: -140,
+    complete: true,
   },
   {
     year: '2022',
