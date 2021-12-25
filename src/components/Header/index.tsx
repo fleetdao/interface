@@ -18,6 +18,7 @@ import Column from '../Column'
 import Row from '../Row'
 import logoLight from '../../assets/images/logo-light.svg'
 import logoDark from '../../assets/images/logo-dark.svg'
+import { darken, lighten, opacify, shade, tint } from 'polished'
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -64,22 +65,23 @@ const Navbar = styled(Row)`
     display: none;
   `};
 `
-const NavLink = styled.a`
+const NavLink = styled.span<{
+  active: boolean
+}>`
   position: relative;
   display: flex;
   align-items: center;
-  margin: 0 1.5rem;
-  padding: 0 1rem;
-  height: 3.75rem;
-  font-size: 1rem;
-  color: ${({ theme }) => theme.text1};
+  margin: 0 1rem;
+  padding: 0 1.5rem;
+  height: 2.75rem;
+  background-color: ${({ theme, active }) => active ? (theme.darkMode ? shade(0.5, theme.bg3) : tint(0.5, theme.bg3)) : theme.bg2};
+  border-radius: 5px;
+  font-size: 1.1429rem;
+  color: ${({ theme, active }) => active ? theme.text1 : theme.text2};
+  cursor: pointer;
 
   &:hover {
-    color: ${({ theme }) => theme.primary2};
-  }
-
-  &:hover:after {
-    background-color: ${({ theme }) => theme.primary2};
+    color: ${({ theme }) => theme.text1};
   }
 `
 const Searchbar = styled(Column)``
@@ -171,22 +173,20 @@ const Header = () => {
   const { t } = useTranslation('common')
   const currentLanguage = useCurrentLanguage()
   const [darkMode, toggleDarkMode] = useDarkModeManager()
-  const [darkHeader, setDarkHeader] = useState<boolean>(false)
-  const [inHomePage, setInHomePage] = useState<boolean>(false)
-
-  useEffect(() => {
-    setInHomePage(router.pathname === '/')
-  }, [inHomePage])
-
-  // toggle dark header
-  useEffect(() => {
-    const onScroll = () => {
-      const currentPosition = window.pageYOffset
-      setDarkHeader(currentPosition > 60)
+  const dataSource = [
+    {
+      pathname: '/',
+      title: t('navbar.home'),
+    },
+    {
+      pathname: '/project',
+      title: t('navbar.project'),
+    },
+    {
+      pathname: '/proposal',
+      title: t('navbar.proposal'),
     }
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [darkHeader])
+  ]
 
   const changeLanguage = (language: string) => () => {
     const toLanguage = language === 'zh' ? SupportedLanguage.EN : SupportedLanguage.ZH
@@ -207,9 +207,14 @@ const Header = () => {
       </Link>
 
       <Navbar>
-        <NavLink href="">{t('navbar.home')}</NavLink>
-        <NavLink href="project">{t('navbar.project')}</NavLink>
-        <NavLink href="proposal">{t('navbar.proposal')}</NavLink>
+        {dataSource.map((item: any, i: number) => (
+          <Link
+            href={item.pathname}
+            key={i}
+          >
+            <NavLink active={router.pathname === item.pathname}>{item.title}</NavLink>
+          </Link>
+        ))}
       </Navbar>
 
       <MenuContainer>

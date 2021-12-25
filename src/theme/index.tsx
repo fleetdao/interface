@@ -34,6 +34,7 @@ const black = '#000000'
 
 export const colors = (darkMode: boolean): Colors => {
   return {
+    darkMode,
     // base
     white,
     black,
