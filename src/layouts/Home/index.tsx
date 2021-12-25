@@ -1,20 +1,18 @@
 import React from 'react'
 import { ArrowLeft } from 'react-feather'
-import BaseLayout from '../Page'
 import styled from 'styled-components'
+import BaseLayout from '../Base'
+import Header from '../../components/Header'
+import Footer from '../../components/Footer'
+import Column from '../../components/Column'
 
-const NavContainer = styled.div`
-`
-
-const NavBackButton = styled.a`
-  display: inline-flex;
-  width: 3rem;
-  height: 3rem;
-  transition: all .2s ease-in-out;
-
-  &:hover {
-    transform: translateX(-4px);
-  }
+const BaseContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  padding: 3.75rem 0 0;
+  min-height: 100vh;
 `
 
 const TitleContainer = styled.div`
@@ -33,23 +31,10 @@ interface HomeLayoutProps {
 
 const HomeLayout = ({ title, children, home, onBack }: HomeLayoutProps) => {
   return (
-    <BaseLayout>
-      <>
-        <NavContainer>
-          {!home && (
-            <NavBackButton onClick={onBack}>
-              <ArrowLeft size={40} />
-            </NavBackButton>
-          )}
-        </NavContainer>
-        {title && (
-          <TitleContainer>
-            {title}
-          </TitleContainer>
-        )}
-        {children}
-      </>
-    </BaseLayout>
+    <BaseContainer>
+      <Header />
+      {children}
+    </BaseContainer>
   )
 }
 

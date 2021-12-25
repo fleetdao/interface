@@ -34,9 +34,6 @@ FleetDAO中关于提案、投票、Token等DAO部分的实现方案，将采用�
 ## 项目结构
 FleetDAO用户界面部分的源代码组织结构，参照NextJS的相关约定：[Nextjs org](https://nextjs.org), [Next Docs](https://nextjs.org/docs/getting-started)👉。  
 我们对项目`src`路径下的目录结构，做如下约定：
-- **assets**
-静态资源路径，包括图片、字体文件、svg等；
-
 - **components**
 通用组件目录，包含`Button`, `Card`, `Column`, `Header`, `Footer`, `Loader`, `Input`, `Modal`, `Row`, `Toggle`等页面通用组件，后续开发过程中按需增加。
 

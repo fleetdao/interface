@@ -8,7 +8,7 @@ const FooterContainer = styled.footer`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 2rem;
+  height: ${({ theme }) => theme.footerHeight};
   font-size: 0.75rem;
   z-index: 2;
 `

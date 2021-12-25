@@ -40,10 +40,10 @@ export const colors = (darkMode: boolean): Colors => {
     black,
 
     // text
-    text1: darkMode ? '#FFFFFF' : '#003BDE',
-    text2: darkMode ? '#dedede' : '#4862ef',
-    text3: darkMode ? '#97a0e2' : '#979797',
-    text4: darkMode ? '#4862ef' : '#dedede',
+    text1: darkMode ? '#02F2E1' : '#003BDE',
+    text2: darkMode ? '#08C8BB' : '#285AFF',
+    text3: darkMode ? '#888888' : '#888888',
+    text4: darkMode ? '#1e1f22' : '#dedede',
     text5: darkMode ? '#003BDE' : '#EEF0FF',
 
     // backgrounds / greys
@@ -61,10 +61,10 @@ export const colors = (darkMode: boolean): Colors => {
     advancedBG: darkMode ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.6)',
 
     //primary colors
-    primary1: darkMode ? '#ffffff' : '#003BDE',
-    primary2: darkMode ? '#01F4E2' : '#01F4E2',
-    primary3: darkMode ? '#4D8FEA' : '#FF99C9',
-    primary4: darkMode ? '#376bad70' : '#00d8ca',
+    primary1: darkMode ? '#02F2E1' : '#003BDE',
+    primary2: darkMode ? '#08C8BB' : '#285AFF',
+    primary3: darkMode ? '#108883' : '#A0B4FF',
+    primary4: darkMode ? '#18494B' : '#DDE6FF',
     primary5: darkMode ? '#153d6f70' : '#FDEAF1',
 
     // color text
@@ -103,6 +103,11 @@ export const theme = (darkMode: boolean): DefaultTheme => {
 
     headerHeight: '4rem',
     headerBg: darkMode ? '#2f2f99' : '#fff',
+
+    footerHeight: '2rem',
+
+    containerMinWidth: '1080px',
+    containerMaxWidth: '1440px',
 
     // css snippets
     flexColumnNoWrap: css`
@@ -178,6 +183,11 @@ export const ThemedGlobalStyle = createGlobalStyle`
   h1,h2,h3,h4,h5,h6,p,dl,dd,dt {
     margin: 0;
     padding: 0;
+  }
+
+  h1,h2,h3,h4,h5,h6 {
+    font-family: Ubuntu;
+    font-weight: 500;
   }
 
   a {

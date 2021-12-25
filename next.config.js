@@ -13,4 +13,9 @@ const nextConfig = {
   i18n,
 }
 
-module.exports = withPlugins([[withImages]], nextConfig)
+const imageConfig = withImages({
+  name: '[name].[hash:base64:8].[ext]',
+  fileExtensions: ['jpg', 'jpeg', 'png', 'gif', 'svg'],
+})
+
+module.exports = withPlugins([[imageConfig]], nextConfig)

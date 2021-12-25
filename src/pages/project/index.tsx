@@ -38,7 +38,7 @@ const ProjectPage = ({ recordMap }: any) => {
   return (
     <PageLayout>
       <div>
-        <h1>Projects</h1>
+        <h1>{t('navbar.project')}</h1>
         <ul>
           {recordMap && recordMap.results.map((item: any, i: number) => {
             if (item.properties.Name.title[0]) {

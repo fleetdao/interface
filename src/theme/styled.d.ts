@@ -74,6 +74,10 @@ declare module 'styled-components' {
 
     headerHeight: string
     headerBg: Color
+    footerHeight: string
+
+    containerMinWidth: string
+    containerMaxWidth: string
 
     // css snippets
     flexColumnNoWrap: FlattenSimpleInterpolation

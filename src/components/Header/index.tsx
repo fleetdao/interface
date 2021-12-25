@@ -1,11 +1,11 @@
 import React from 'react'
 import { useEffect, useRef, useState } from 'react'
-import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
 import { Globe, Moon, Sun } from 'react-feather'
+import { shade, tint, transitions } from 'polished'
 import { useTranslation } from 'next-i18next'
 import { useDarkModeManager } from '../../state/user/hooks'
 import { updateToggleLanguage } from '../../state/application/actions'
@@ -13,12 +13,9 @@ import { useCurrentLanguage } from '../../state/application/hooks'
 import { SupportedLanguage } from '../../constants/application'
 
 import styled from 'styled-components'
-import { ButtonOutlined, ButtonLight } from '../Button'
+import { ButtonOutlined } from '../Button'
 import Column from '../Column'
 import Row from '../Row'
-import logoLight from '../../assets/images/logo-light.svg'
-import logoDark from '../../assets/images/logo-dark.svg'
-import { darken, lighten, opacify, shade, tint } from 'polished'
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -30,9 +27,8 @@ const HeaderContainer = styled.header`
   justify-content: space-between;
   width: 100%;
   height: ${({ theme }) => theme.headerHeight};
-  z-index: 2;
+  z-index: 10;
   background-color: ${({ theme }) => theme.bg2};
-  box-shadow: rgb(0 0 0 / 5%) 0px 2px 3px;
 
   > a {
     display: flex;
@@ -43,20 +39,13 @@ const HeaderContainer = styled.header`
 const LogoWrapper = styled.a`
   display: flex;
   margin-left: 1rem;
-  font-size: 22px;
-  font-weight: 700;
-  color: ${({ theme }) => theme.text2};
-  text-decoration: none;
-  cursor: pointer;
-`
-const LogoIcon = styled.img`
-  height: 2.25rem;
 `
 const LogoText = styled.span`
   margin-left: .5rem;
   color: ${({ theme }) => theme.text1};
   font-size: 22px;
   font-weight: 500;
+  font-family: Ubuntu;
 `
 const Navbar = styled(Row)`
   justify-content: center;
@@ -74,11 +63,13 @@ const NavLink = styled.span<{
   margin: 0 1rem;
   padding: 0 1.5rem;
   height: 2.75rem;
-  background-color: ${({ theme, active }) => active ? (theme.darkMode ? shade(0.5, theme.bg3) : tint(0.5, theme.bg3)) : theme.bg2};
   border-radius: 5px;
+  background-color: ${({ theme, active }) => active ? (theme.darkMode ? shade(0.5, theme.bg3) : tint(0.5, theme.bg3)) : theme.bg2};
   font-size: 1.1429rem;
-  color: ${({ theme, active }) => active ? theme.text1 : theme.text2};
+  font-weight: ${({ active }) => active ? 500 : 400};
+  color: ${({ theme, active }) => active ? theme.text1 : theme.text3};
   cursor: pointer;
+  ${transitions(['color', 'background-color'], '.5s ease-in-out')};
 
   &:hover {
     color: ${({ theme }) => theme.text1};
@@ -159,6 +150,7 @@ const ThemeToggle = styled.a`
   color: ${({ theme }) => theme.text1};
 
   &:hover {
+    background-color: ${({ theme }) => theme.bg5};
     color: ${({ theme }) => theme.text2};
   }
 
@@ -189,9 +181,9 @@ const Header = () => {
   ]
 
   const changeLanguage = (language: string) => () => {
-    const toLanguage = language === 'zh' ? SupportedLanguage.EN : SupportedLanguage.ZH
+    const toLanguage = language === 'zh-CN' ? SupportedLanguage.EN : SupportedLanguage.ZH
+    router.replace(router.pathname, router.pathname, { locale: language })
     dispatch(updateToggleLanguage(toLanguage))
-    // i18n.changeLanguage(toLanguage)
     if (typeof window !== 'undefined') {
       localStorage.setItem('FLEET_DAO_LANGUAGE', toLanguage)
     }
@@ -201,7 +193,7 @@ const Header = () => {
     <HeaderContainer>
       <Link href="/">
         <LogoWrapper>
-          {/* <LogoIcon src={darkMode ? logoLight : logoDark} /> */}
+          <Image src={darkMode ? '/static/logo-light.svg' : '/static/logo-dark.svg'} width={30} height={30} />
           <LogoText>FleetDAO</LogoText>
         </LogoWrapper>
       </Link>
@@ -220,7 +212,7 @@ const Header = () => {
       <MenuContainer>
         <LanguageToggle onClick={changeLanguage(currentLanguage)}>
           <Globe size={18} />
-          <LanguageText>{currentLanguage === 'zh' ? 'English' : '简体中文'}</LanguageText>
+          <LanguageText>{currentLanguage === 'zh-CN' ? 'English' : '简体中文'}</LanguageText>
         </LanguageToggle>
 
         <ThemeToggle onClick={() => toggleDarkMode()}>
