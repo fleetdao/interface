@@ -6,7 +6,7 @@ FleetDAO用户界面实现，基于TypeScript + [NextJS](https://github.com/verc
 - Wiki: https://github.com/fleetdao/interface/wiki
 - 产品设计原型：https://modao.cc/app/d992fb0802b984aab331f46ee074b142e460811d
 - Discord: https://discord.com/invite/Jj5b5dwNZb
-- Twitter
+- Twitter: https://twitter.com/fleetdao
 
 ## Install
 ```bash

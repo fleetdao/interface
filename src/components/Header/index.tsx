@@ -1,11 +1,10 @@
 import React from 'react'
-import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
 import { Globe, Moon, Sun } from 'react-feather'
-import { shade, tint, transitions } from 'polished'
+import { darken, lighten, opacify, shade, tint, transitions } from 'polished'
 import { useTranslation } from 'next-i18next'
 import { useDarkModeManager } from '../../state/user/hooks'
 import { updateToggleLanguage } from '../../state/application/actions'
@@ -28,7 +27,8 @@ const HeaderContainer = styled.header`
   width: 100%;
   height: ${({ theme }) => theme.headerHeight};
   z-index: 10;
-  background-color: ${({ theme }) => theme.bg2};
+  background-color: ${({ theme }) => theme.darkMode ? 'rgba(43, 43, 62, .1)' : 'rgba(255, 255, 255, .1)'};
+  backdrop-filter: blur(80px);
 
   > a {
     display: flex;
@@ -64,7 +64,7 @@ const NavLink = styled.span<{
   padding: 0 1.5rem;
   height: 2.75rem;
   border-radius: 5px;
-  background-color: ${({ theme, active }) => active ? (theme.darkMode ? shade(0.5, theme.bg3) : tint(0.5, theme.bg3)) : theme.bg2};
+  background-color: ${({ theme, active }) => active ? (theme.darkMode ? shade(0.5, theme.bg3) : tint(0.5, theme.bg3)) : 'transparent'};
   font-size: 1.1429rem;
   font-weight: ${({ active }) => active ? 500 : 400};
   color: ${({ theme, active }) => active ? theme.text1 : theme.text3};

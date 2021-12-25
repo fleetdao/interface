@@ -23,11 +23,9 @@ export const getStaticProps = async ({ locale }: { locale: string }) => ({
 
 const HomePage = () => {
   const { t } = useTranslation('home')
-  const [darkMode, toggleDarkMode] = useDarkModeManager()
+  const [darkMode] = useDarkModeManager()
   const { aboutDataSource, roadmapDataSource, communityDatasource } = useHomeDataSource()
-  const onGoVoxels = useCallback(() => {
-    window.open('https://www.cryptovoxels.com/play?coords=SW@1063E,390S,0.5U')
-  }, [])
+  const onGoVoxels = useCallback(() => window.open('https://www.cryptovoxels.com/play?coords=SW@1063E,390S,0.5U'), [])
   const renderCommunityIcon = (name: string) => {
     if (name === 'github') {
       return <GitHub size={16} />
