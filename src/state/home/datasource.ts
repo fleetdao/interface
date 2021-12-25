@@ -67,7 +67,7 @@ const communityDatasource = (): CommunityDatasource[] => [
   {
     name: 'twitter',
     title: 'Twitter',
-    link: '',
+    link: 'https://twitter.com/fleetdao',
   },
   {
     name: 'github',

@@ -24,38 +24,38 @@ yarn start
 ```
 
 ## 实现方案
-- **数据存储**
+- **数据存储**  
 数据存储使用[Notion](https://www.notion.so)，参考[Notion开发文档](https://developers.notion.com)。
 我们已经创建了Fleetdao-dev的Notion Workspace用来测试，开发者可通过[Fleetdao-dev-Invite](https://www.notion.so/fleetdao-dev/invite/acb27d1e3fa1f3c50acbd66ab88fb793f264bf52)链接申请测试。
 
-- **DAO**
+- **DAO**  
 FleetDAO中关于提案、投票、Token等DAO部分的实现方案，将采用第三方的DAO工具进行构建，目前我们初步计采用[Aragon](https://aragon.org)来构建。
 
 ## 项目结构
 FleetDAO用户界面部分的源代码组织结构，参照NextJS的相关约定：[Nextjs org](https://nextjs.org), [Next Docs](https://nextjs.org/docs/getting-started)👉。  
 我们对项目`src`路径下的目录结构，做如下约定：
-- **components**
+- **components**  
 通用组件目录，包含`Button`, `Card`, `Column`, `Header`, `Footer`, `Loader`, `Input`, `Modal`, `Row`, `Toggle`等页面通用组件，后续开发过程中按需增加。
 
-- **constants**
+- **constants**  
 定义常量的文件放在`constants`目录。
 
-- **layouts**
+- **layouts**  
 页面布局目录，目前包含`Base`, `Home`, `Page`三种页面布局，后续开发中按需增加。
 
-- **lib**
+- **lib**  
 用于封装一些通用的函数和中间件。
 
-- **pages**
+- **pages**  
 Page Views目录，每个页面都根据其文件名与一个路由相关联，关于pages部分的路由规则，请参考[Next Pages的相关文档](https://nextjs.org/docs/basic-features/pages)。
 
-- **state**
+- **state**  
 React redux状态管理，每个模块一个目录，包含`actions.ts`, `reducer.ts`, `updaters`, `hooks.ts`四个文件。
 
-- **theme**
+- **theme**  
 styled-components变量定义在theme目录下的`index.tsx`文件中，通过`styled.ts`文件进行类型约束。
 
-- **utils**
+- **utils**  
 通用函数放在utils目录下。
 
 ## 开发工具
