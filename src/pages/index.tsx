@@ -421,7 +421,7 @@ const RoadmapItem = styled.div<{
 `
 const RoadmapSail = styled.svg<{ size?: string; stroke?: string }>`
   position: absolute;
-  top: -32px;
+  top: -34px;
   left: 26px;
   path {
     fill: ${({ theme }) => theme.text1};
@@ -434,6 +434,7 @@ const RoadmapSail = styled.svg<{ size?: string; stroke?: string }>`
 
 const VoxelsContainer = styled(FullScreenContainer)`
   min-height: 50vh;
+  /* background-color: ${({ theme }) => theme.bg1}; */
 
   &:before {
     margin-top: 6px;
@@ -511,12 +512,12 @@ const VoxelsImage = styled.img`
 
 const FooterContainer = styled(Row)`
   min-height: 6.5rem;
-  background-color: ${({ theme }) => darken(.05, theme.bg1)};
+  background-color: ${({ theme }) => darken(.015, theme.bg1)};
 `
 const SiteContent = styled(Row)`
   flex: 1;
   justify-content: center;
-  opacity: .5;
+  opacity: .85;
 `
 const SiteLogo = styled.img`
   width: 2rem;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -16,7 +16,78 @@ import { ButtonOutlined } from '../Button'
 import Column from '../Column'
 import Row from '../Row'
 
-const HeaderContainer = styled.header`
+const Header = () => {
+  const dispatch = useDispatch()
+  const router = useRouter()
+  const { t } = useTranslation('common')
+  const currentLanguage = useCurrentLanguage()
+  const [darkMode, toggleDarkMode] = useDarkModeManager()
+  const [inHomePage, setInHomePage] = useState<boolean>(false)
+  const dataSource = [
+    {
+      pathname: '/',
+      title: t('navbar.home'),
+    },
+    {
+      pathname: '/project',
+      title: t('navbar.project'),
+    },
+    {
+      pathname: '/proposal',
+      title: t('navbar.proposal'),
+    }
+  ]
+
+  const changeLanguage = (language: string) => () => {
+    const toLanguage = language === 'zh-CN' ? SupportedLanguage.EN : SupportedLanguage.ZH
+    router.replace(router.pathname, router.pathname, { locale: language })
+    dispatch(updateToggleLanguage(toLanguage))
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('FLEET_DAO_LANGUAGE', toLanguage)
+    }
+  }
+
+  useEffect(() => {
+    setInHomePage(router.pathname === '/')
+  }, [inHomePage])
+
+  return (
+    <HeaderContainer inHomePage={inHomePage}>
+      <Link href="/">
+        <LogoWrapper>
+          <Image src={darkMode ? '/static/logo-light.svg' : '/static/logo-dark.svg'} width={30} height={30} />
+          <LogoText>FleetDAO</LogoText>
+        </LogoWrapper>
+      </Link>
+
+      <Navbar>
+        {dataSource.map((item: any, i: number) => (
+          <Link
+            href={item.pathname}
+            key={i}
+          >
+            <NavLink active={router.pathname === item.pathname}>{item.title}</NavLink>
+          </Link>
+        ))}
+      </Navbar>
+
+      <MenuContainer>
+        <LanguageToggle onClick={changeLanguage(currentLanguage)}>
+          <Globe size={18} />
+          <LanguageText>{currentLanguage === 'zh-CN' ? 'English' : '简体中文'}</LanguageText>
+        </LanguageToggle>
+
+        <ThemeToggle onClick={() => toggleDarkMode()}>
+          {darkMode ? <Sun size={16} /> : <Moon size={16} />}
+        </ThemeToggle>
+      </MenuContainer>
+    </HeaderContainer>
+  )
+}
+
+const HeaderContainer = styled.header<{
+  inHomePage: boolean
+}>`
   position: fixed;
   top: 0;
   left: 0;
@@ -27,7 +98,7 @@ const HeaderContainer = styled.header`
   width: 100%;
   height: ${({ theme }) => theme.headerHeight};
   z-index: 10;
-  background-color: ${({ theme }) => theme.darkMode ? 'rgba(43, 43, 62, .1)' : 'rgba(255, 255, 255, .1)'};
+  background-color: ${({ theme, inHomePage }) => inHomePage ? (theme.darkMode ? 'rgba(43, 43, 62, .1)' : 'rgba(255, 255, 255, .1)') : theme.bg2};
   backdrop-filter: blur(200px);
 
   > a {
@@ -158,69 +229,5 @@ const ThemeToggle = styled.a`
     display: none;
   `};
 `
-
-const Header = () => {
-  const dispatch = useDispatch()
-  const router = useRouter()
-  const { t } = useTranslation('common')
-  const currentLanguage = useCurrentLanguage()
-  const [darkMode, toggleDarkMode] = useDarkModeManager()
-  const dataSource = [
-    {
-      pathname: '/',
-      title: t('navbar.home'),
-    },
-    {
-      pathname: '/project',
-      title: t('navbar.project'),
-    },
-    {
-      pathname: '/proposal',
-      title: t('navbar.proposal'),
-    }
-  ]
-
-  const changeLanguage = (language: string) => () => {
-    const toLanguage = language === 'zh-CN' ? SupportedLanguage.EN : SupportedLanguage.ZH
-    router.replace(router.pathname, router.pathname, { locale: language })
-    dispatch(updateToggleLanguage(toLanguage))
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('FLEET_DAO_LANGUAGE', toLanguage)
-    }
-  }
-
-  return (
-    <HeaderContainer>
-      <Link href="/">
-        <LogoWrapper>
-          <Image src={darkMode ? '/static/logo-light.svg' : '/static/logo-dark.svg'} width={30} height={30} />
-          <LogoText>FleetDAO</LogoText>
-        </LogoWrapper>
-      </Link>
-
-      <Navbar>
-        {dataSource.map((item: any, i: number) => (
-          <Link
-            href={item.pathname}
-            key={i}
-          >
-            <NavLink active={router.pathname === item.pathname}>{item.title}</NavLink>
-          </Link>
-        ))}
-      </Navbar>
-
-      <MenuContainer>
-        <LanguageToggle onClick={changeLanguage(currentLanguage)}>
-          <Globe size={18} />
-          <LanguageText>{currentLanguage === 'zh-CN' ? 'English' : '简体中文'}</LanguageText>
-        </LanguageToggle>
-
-        <ThemeToggle onClick={() => toggleDarkMode()}>
-          {darkMode ? <Sun size={16} /> : <Moon size={16} />}
-        </ThemeToggle>
-      </MenuContainer>
-    </HeaderContainer>
-  )
-}
 
 export default Header
