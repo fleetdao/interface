@@ -23,13 +23,9 @@ const MainContainer = styled.main`
 const ContentContainer = styled(Column)`
   position: relative;
   align-items: center;
-  justify-content: center;
-  margin: 1.25rem auto;
-  padding: 1.25rem;
+  margin: 0 auto;
   width: 100%;
   max-width: 1240px;
-  background-color: ${({ theme }) => theme.bg2};
-  border-radius: .75rem;
   overflow: hidden;
 `
 

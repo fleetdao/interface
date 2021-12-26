@@ -3,7 +3,9 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Client } from '@notionhq/client'
 import PageLayout from '../../layouts/Page'
 import { DatabaseID } from '../../constants/project'
+import List from '../../components/Project/List'
 import recordMap from '../../../mock/database.json'
+
 
 const notion = new Client({ auth: process.env.NOTION_AUTH_SECRET })
 
@@ -35,22 +37,11 @@ const ProjectPage = ({ recordMap }: any) => {
   if (!recordMap) {
     return null
   }
+  console.log('recordMap: ', recordMap)
+
   return (
     <PageLayout>
-      <div>
-        <h1>{t('navbar.project')}</h1>
-        <ul>
-          {recordMap && recordMap.results.map((item: any, i: number) => {
-            if (item.properties.Name.title[0]) {
-              return <li key={i}>
-                <a href={item.url} target="_blank">
-                  {item.properties.Name.title[0].text.content}
-                </a>
-              </li>
-            }
-          })}
-        </ul>
-      </div>
+      <List dataSource={recordMap.results} />
     </PageLayout>
   )
 }
