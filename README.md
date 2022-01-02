@@ -4,7 +4,7 @@ FleetDAO用户界面实现，基于TypeScript + [NextJS](https://github.com/verc
 
 - 网站: https://fleetdao.com
 - Wiki: https://github.com/fleetdao/interface/wiki
-- 产品设计原型：https://modao.cc/app/d992fb0802b984aab331f46ee074b142e460811d
+- 产品原型: https://modao.cc/app/d992fb0802b984aab331f46ee074b142e460811d
 - Discord: https://discord.com/invite/Jj5b5dwNZb
 - Twitter: https://twitter.com/fleetdao
 
@@ -60,6 +60,11 @@ styled-components变量定义在theme目录下的`index.tsx`文件中，通过`s
 
 ## 开发工具
 开发人员可使用任何自己熟悉的开发工具，但VSCode还是大部分开发者的首选。
+
+## 编码规范
+- [命名规范](https://github.com/fleetdao/interface/wiki/5.-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91#%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83)
+- [TypeScript规范](https://github.com/fleetdao/interface/wiki/5.-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91#typescript%E4%B9%A6%E5%86%99%E8%A7%84%E8%8C%83)
+- [Styled-components规范](https://github.com/fleetdao/interface/wiki/5.-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91#styled-componentscss%E4%B9%A6%E5%86%99%E8%A7%84%E8%8C%83)
 
 ## 开发原则
 - 允许任何人提出Issue和FIP（FleetDAO Improvement Proposal）提案。

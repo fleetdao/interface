@@ -24,7 +24,7 @@ module.exports = {
     },
     section4: {
       title: 'Token Funds & Personal Investors',
-      info: 'A decentralized organization created for Token funds, investors, and individual smart players in the blockchain, find a new direction for DAPPs’ research and investment.',
+      info: 'A decentralized organization created for Token funds, personal investors, and individual smart players in the blockchain, find a new direction for DAPPs’ research and investment.',
     },
   },
   roadmap: {
